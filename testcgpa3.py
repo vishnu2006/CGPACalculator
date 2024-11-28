@@ -71,7 +71,9 @@ st.markdown('<p class="subject-label">DBMS Lab (Credits: 1)</p>', unsafe_allow_h
 i = st.slider("DBMS Lab", 0, 10, step=1, help="Database Management Systems Lab") * 1
 
 # Fixed value for MOOC NPTEL
-j = 20
+
+st.markdown('<p class="subject-label">MOOC Course (Credits: 1)</p>', unsafe_allow_html=True)
+j = st.slider("MOOC", 0, 10, step=1, help="MOOC Internship") * 2
 
 # Calculate SGPA and CGPA
 summ = a + b + c + d + e + f + g + h + i + j

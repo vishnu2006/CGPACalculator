@@ -72,7 +72,7 @@ i = st.slider("DBMS Lab", 0, 10, step=1, help="Database Management Systems Lab")
 
 # Fixed value for MOOC NPTEL
 
-st.markdown('<p class="subject-label">MOOC Course (Credits: 2)</p>', unsafe_allow_html=True)
+st.markdown('<p class="subject-label">MOOC Course internship (Credits: 2)</p>', unsafe_allow_html=True)
 j = st.slider("MOOC", 0, 10, step=1, help="MOOC Internship") * 2
 
 # Calculate SGPA and CGPA

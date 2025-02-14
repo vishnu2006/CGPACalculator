@@ -1,5 +1,4 @@
 import streamlit as st
-# streamlit run c:\Users\vishn\Downloads\testcgpa3.py
 
 # Title and description
 st.title("CGPA and SGPA Calculator")
@@ -13,13 +12,18 @@ if current_input_option == "Slider":
 else:
     current = st.number_input("Enter your current CGPA:", min_value=0.0, max_value=10.0, format="%.2f") * 41
 
-# Custom CSS for styling subject names
+# Custom CSS for styling
 st.markdown(
     """
     <style>
+    body {
+        background: url("file:///C:/Users/vishn/Downloads/cool-wallpapers-v0-qm1v3yhghkvb1.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
     .subject-label {
         font-size: 18px;
         font-weight: bold;
+        color: white;
         margin-bottom: 10px;
     }
     .fixed-right-middle {
@@ -37,62 +41,49 @@ st.markdown(
         margin: 10px;
         font-size: 24px;
     }
+    .stSlider .stSliderThumb {
+        background: linear-gradient(90deg, red, green);
+    }
+    .stSlider .stSliderValue {
+        background: none !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Display each subject label and slider
-st.markdown('<p class="subject-label">MSF (Credits: 3)</p>', unsafe_allow_html=True)
-a = st.slider("MSF", 0, 10, step=1, help="Microprocessor Systems Fundamentals") * 3
+# Subject inputs
+subjects = [
+    ("SPQT", 3), ("SSP", 3), ("DAA", 3), ("FML", 3), ("DAV", 3), ("EEA", 3),
+    ("SPQT Lab", 1), ("Linux & LaTeX Lab", 1), ("DAA Lab", 1), ("FML Lab", 1), ("Upskill Course", 0.5)
+]
 
-st.markdown('<p class="subject-label">DLCA (Credits: 3)</p>', unsafe_allow_html=True)
-d = st.slider("DLCA", 0, 10, step=1, help="Digital Logic and Computer Architecture") * 3
-
-st.markdown('<p class="subject-label">Java (Credits: 3)</p>', unsafe_allow_html=True)
-b = st.slider("Java", 0, 10, step=1, help="Java Programming") * 3
-
-st.markdown('<p class="subject-label">OS (Credits: 3)</p>', unsafe_allow_html=True)
-c = st.slider("OS", 0, 10, step=1, help="Operating Systems") * 3
-
-st.markdown('<p class="subject-label">DS (Credits: 3)</p>', unsafe_allow_html=True)
-e = st.slider("DS", 0, 10, step=1, help="Data Structures") * 3
-
-st.markdown('<p class="subject-label">DBMS (Credits: 3)</p>', unsafe_allow_html=True)
-f = st.slider("DBMS", 0, 10, step=1, help="Database Management Systems") * 3
-
-st.markdown('<p class="subject-label">Java Lab (Credits: 1)</p>', unsafe_allow_html=True)
-g = st.slider("Java Lab", 0, 10, step=1, help="Java Programming Lab") * 1
-
-st.markdown('<p class="subject-label">DS Lab (Credits: 1)</p>', unsafe_allow_html=True)
-h = st.slider("DS Lab", 0, 10, step=1, help="Data Structures Lab") * 1
-
-st.markdown('<p class="subject-label">DBMS Lab (Credits: 1)</p>', unsafe_allow_html=True)
-i = st.slider("DBMS Lab", 0, 10, step=1, help="Database Management Systems Lab") * 1
-
-# Fixed value for MOOC NPTEL
-
-st.markdown('<p class="subject-label">MOOC Course internship (Credits: 2)</p>', unsafe_allow_html=True)
-j = st.slider("MOOC", 0, 10, step=1, help="MOOC Internship") * 2
+summ = 0
+for subject, credits in subjects:
+    st.markdown(f'<p class="subject-label">{subject} (Credits: {credits})</p>', unsafe_allow_html=True)
+    summ += st.slider(subject, 0, 10, step=1) * credits
 
 # Calculate SGPA and CGPA
-summ = a + b + c + d + e + f + g + h + i + j
-sgpa = summ / 23
-cgpa = (summ + current) / 64
+sgpa = summ / 23.5
+cgpa = (summ + current) / 64.5
 
 # Color settings for CGPA and SGPA
 def get_color(value):
     if value < 6:
-        return "#FF4C4C"  # Red for low values
+        return "#FF4C4C"  # Red
+    elif value < 7:
+        return "#FFA500"  # Orange
     elif value < 8:
-        return "#FFA500"  # Orange for mid-range values
+        return "#FFD700"  # Yellow
+    elif value < 9:
+        return "#ADFF2F"  # Light Green
     else:
-        return "#4CAF50"  # Green for high values
+        return "#4CAF50"  # Green
 
 sgpa_color = get_color(sgpa)
 cgpa_color = get_color(cgpa)
 
-# Display results in a fixed right middle position with colored circles
+# Display results
 st.markdown(
     f"""
     <div class="fixed-right-middle">

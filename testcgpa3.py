@@ -8,7 +8,7 @@ st.write("Enter your predicted CGPA for each subject:")
 current_input_option = st.radio("Choose how to input your current CGPA:", ("Slider", "Manual Input"))
 
 if current_input_option == "Slider":
-    current = st.slider("What is your current CGPA?", 0.0, 10.0, step=0.1) * 41
+    current = st.slider("What is your current CGPA?", 0.0, 10.0, step=0.1) * 64
 else:
     current = st.number_input("Enter your current CGPA:", min_value=0.0, max_value=10.0, format="%.2f") * 41
 
@@ -64,8 +64,8 @@ for subject, credits in subjects:
     summ += st.slider(subject, 0, 10, step=1) * credits
 
 # Calculate SGPA and CGPA
-sgpa = summ / 23.5
-cgpa = (summ + current) / 64.5
+sgpa = summ / 22.5
+cgpa = (summ + current) / 86.5
 
 # Color settings for CGPA and SGPA
 def get_color(value):
